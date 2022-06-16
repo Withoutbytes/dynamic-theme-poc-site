@@ -3,9 +3,11 @@
 @tailwind utilities;
 
 @layer base {
+	/* Não é necessário esse css, use apenas caso você queria usar no loading do tema */
 	:root {
 		--tw-color-primary: #0070f3;
 		--tw-color-secondary: #f1c40f;
 		--tw-color-background: #1a1a1a;
+		--tw-color-link: #0000ff;
 	}
 }
