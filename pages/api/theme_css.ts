@@ -20,7 +20,7 @@ const getTheme = async () => {
     `;
 };
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-	res.setHeader("Cache-Control", "s-maxage=2"); // Cache for 2 seconds
+	res.setHeader("Cache-Control", "s-maxage=60"); // Cache for 60 seconds
 	res.setHeader("Content-Type", "text/css");
 	res.status(200).end(await getTheme());
 }
