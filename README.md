@@ -72,3 +72,11 @@ Resposta do servidor
     "primary": "#0000ff"
 }
 ```
+
+## env
+
+Adicione no seu ENV as seguintes variáveis
+
+```md
+MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.p7qsa.mongodb.net/?retryWrites=true&w=majority
+```
