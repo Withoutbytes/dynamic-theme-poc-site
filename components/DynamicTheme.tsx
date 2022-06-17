@@ -32,15 +32,15 @@ const DynamicTheme: React.FC<Props> = ({ children }) => {
 		setLoaded(true);
 	}, [themeData]);
 
-	if (!loaded) {
-		return (
-			<div className="flex w-screen h-screen bg-[#1a1a1a]">
-				<div className="mx-auto my-auto">
-					<Rings />
-				</div>
-			</div>
-		);
-	}
+	// if (!loaded) {
+	// 	return (
+	// 		<div className="flex w-screen h-screen bg-[#1a1a1a]">
+	// 			<div className="mx-auto my-auto">
+	// 				<Rings />
+	// 			</div>
+	// 		</div>
+	// 	);
+	// }
 
 	return <>{children}</>;
 };
