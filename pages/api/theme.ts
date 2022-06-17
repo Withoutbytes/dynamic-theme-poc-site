@@ -15,5 +15,6 @@ const getTheme = async () => {
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+	//res.setHeader("Cache-Control", "s-maxage=30"); // Cache for 30 seconds
 	res.status(200).json(await getTheme());
 }
