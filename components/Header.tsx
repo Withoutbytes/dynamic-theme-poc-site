@@ -7,7 +7,7 @@ const Header: React.FC = () => {
 			<title>Poc nextjs</title>
 			<meta name="description" content="Poc theme dynamic" />
 			<link rel="icon" href="/favicon.ico" />
-			<link rel="stylesheet" href="/theme.css" />
+			<link rel="stylesheet" href="/api/theme_css" />
 		</Head>
 	);
 };
