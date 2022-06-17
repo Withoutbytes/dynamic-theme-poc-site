@@ -1,34 +1,74 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# POC para definição de tema dinâmico no Tailwind
 
-## Getting Started
+## Como funciona
 
-First, run the development server:
+Básicamente ele funciona fazendo uma requisição do servidor e definindo váriaveis de css dinâmicamente, na config do tailwind é utilizado de forma simples uma váriavel css.
 
-```bash
-npm run dev
-# or
-yarn dev
+## Exemplo
+
+Definindo a cor primária para amarelo no javascript
+
+```js
+documentStyle.setProperty("--tw-color-primary", "#fff000");
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Config tailwind
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```js
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+    content: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
+    theme: {
+        extend: {
+            colors: {
+                primary: "var(--tw-color-primary)",
+            },
+        },
+    },
+    plugins: [],
+};
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+No react
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```js
+const Home = () => {
+ return (
+    <div>
+        <h1 className="text-2xl text-primary">Texto primário</h1>
+    </div>
+ );
+};
 
-## Learn More
+export default Home;
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Exemplo definindo cor para azul no react, com requisição no servidor
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```js
+import { useEffect } from "react";
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+const Home = () => {
+ useEffect(() => {
+  fetch("/api/theme").then((res) => res.json()).then(theme => {
+   documentStyle.setProperty("--tw-color-primary", theme.primary);      
+  });
+ }, []);
 
-## Deploy on Vercel
+ return (
+    <div>
+        <h1 className="text-2xl text-primary">Texto primário</h1>
+    </div>
+ );
+};
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+export default Home;
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Resposta do servidor
+
+```json
+{
+    "primary": "#0000ff"
+}
+```
